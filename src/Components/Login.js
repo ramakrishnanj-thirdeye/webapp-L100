@@ -79,19 +79,7 @@ const Login = () => {
                                     </form>
 
                                     <hr className="my-4" />
-                                    <div className="text-center">
-                                        <a href="#" className="text-decoration-none">
-                                            Forgot Password?
-                                        </a>
-                                    </div>
-                                    <div className="text-center mt-2">
-                                        <p>
-                                            Don't have an account?{" "}
-                                            <a href="#" className="text-decoration-none">
-                                                Sign Up
-                                            </a>
-                                        </p>
-                                    </div>
+                                
                                 </div>
                             </div>
                         </div>
