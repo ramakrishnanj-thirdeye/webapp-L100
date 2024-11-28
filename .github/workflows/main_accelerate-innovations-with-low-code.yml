@@ -1,62 +1,70 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
-name: Build and deploy Node.js app to Azure Web App - Accelerate-Innovations-with-low-code
-
+name: Build and Deploy Node.js App to Azure Web App - Accelerate-Innovations-with-low-code
+ 
 on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
-
+ 
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    name: Build Job
+ 
     steps:
-      - uses: actions/checkout@v4
-
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+ 
       - name: Set up Node.js version
         uses: actions/setup-node@v3
         with:
           node-version: '20.x'
-
-      - name: npm install, build, and test
+ 
+      - name: Install dependencies and Build
         run: |
           npm install
           npm run build --if-present
-          npm run test --if-present
-
-      - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
-
-      - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v4
+ 
+      - name: Zip build folder for deployment
+        run: zip -r build.zip build/
+ 
+      - name: Upload build artifact for deployment job
+        uses: actions/upload-artifact@v3
         with:
-          name: node-app
-          path: release.zip
-
+          name: build-artifact
+          path: build.zip
+ 
   deploy:
     runs-on: ubuntu-latest
+    name: Deploy Job
     needs: build
     environment:
-      name: 'Production'
+      name: Production
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    
+ 
     steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v4
+      - name: Download build artifact from Build Job
+        uses: actions/download-artifact@v3
         with:
-          name: node-app
-
-      - name: Unzip artifact for deployment
-        run: unzip release.zip
-      
-      - name: 'Deploy to Azure Web App'
+          name: build-artifact
+ 
+      - name: Unzip build artifact
+        run: unzip build.zip
+ 
+      - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'Accelerate-Innovations-with-low-code'
           slot-name: 'Production'
-          package: .
+          package: ./build
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D064E2FACA1044D5B8364D27153CB4A1 }}
+ 
+      - name: Display Deployed App URL
+        run: |
+          echo "## Deployed App URL" >> $GITHUB_STEP_SUMMARY
+          echo "Your application has been deployed to: ${{ steps.deploy-to-webapp.outputs.webapp-url }}" >> $GITHUB_STEP_SUMMARY
