@@ -80,16 +80,24 @@ const Login = () => {
 
                                     <hr className="my-4" />
                                     <div className="text-center">
-                                        <a href="#" className="text-decoration-none">
+                                        <button
+                                            type="button"
+                                            className="btn btn-link text-decoration-none p-0"
+                                            onClick={() => alert("Forgot Password Clicked")}
+                                        >
                                             Forgot Password?
-                                        </a>
+                                        </button>
                                     </div>
                                     <div className="text-center mt-2">
                                         <p>
                                             Don't have an account?{" "}
-                                            <a href="#" className="text-decoration-none">
+                                            <button
+                                                type="button"
+                                                className="btn btn-link text-decoration-none p-0"
+                                                onClick={() => alert("Sign Up Clicked")}
+                                            >
                                                 Sign Up
-                                            </a>
+                                            </button>
                                         </p>
                                     </div>
                                 </div>
