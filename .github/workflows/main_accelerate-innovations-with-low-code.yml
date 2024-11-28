@@ -58,5 +58,5 @@ jobs:
         with:
           app-name: 'Accelerate-Innovations-with-low-code'
           slot-name: 'Production'
-          package: ./build
+          package: .
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D064E2FACA1044D5B8364D27153CB4A1 }}
