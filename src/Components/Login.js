@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import loginimg from "../assets/login_image.svg";
 
 const Login = () => {
     const [username, setUsername] = useState("april@boulderinnovations.com");
@@ -12,7 +13,7 @@ const Login = () => {
         if (username === "april@boulderinnovations.com" && password === "password") {
             sessionStorage.setItem("login", "true");
             setError(false);
-            navigate("/home"); // Navigate to the homepage or dashboard
+            window.location.reload(); // Navigate to the home page
         } else {
             setError(true);
         }
@@ -27,7 +28,7 @@ const Login = () => {
                             {/* Left side with image */}
                             <div className="col-md-6 d-none d-md-flex align-items-center justify-content-center bg-light">
                                 <img
-                                    src="https://via.placeholder.com/300x300.png?text=Login+Image"
+                                    src={loginimg}
                                     alt="Login"
                                     className="img-fluid p-4"
                                 />
@@ -78,8 +79,6 @@ const Login = () => {
                                         </button>
                                     </form>
 
-                                    <hr className="my-4" />
-                                
                                 </div>
                             </div>
                         </div>

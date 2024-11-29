@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import logo from '../assets/boulder_innovation_logo.png'
+import profile from '../assets/April_img.jpg'
 
 function Navbar() {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -13,7 +15,7 @@ function Navbar() {
             <a className="navbar-brand d-flex align-items-center" href="index.html">
                 <div className="navbar-brand-icon">
                     <img
-                        src="img/boulder_innovation_logo.png"
+                        src={logo}
                         alt="Brand Logo"
                         style={{ width: '150px', height: '40px' }}
                     />
@@ -22,16 +24,25 @@ function Navbar() {
 
             {/* Navbar Right - Dynamic Button & User Dropdown */}
             <ul className="navbar-nav ml-auto">
+                {/* Dynamic Button */}
+                <li className="nav-item">
+                    <a href="/M365_Licence_Assignment.html">
+                        
+                    </a>
+                </li>
+
                 {/* Custom User Dropdown */}
                 <li className="nav-item">
                     <div className="dropdown" onClick={toggleDropdown}>
                         <span className="mr-2 d-none d-lg-inline text-gray-600 small">April</span>
+                        <span className="mr-2 d-none d-lg-inline text-gray-600 small">    </span>
                         <img
-                            className="img-profile rounded-circle"
+                            className="img-profile"
                             style={{ height: '40px', width: '40px' }}
-                            src="img/April_img.jfif"
+                            src={profile}
                             alt="User"
                         />
+
                         {/* Custom Dropdown Menu */}
                         {isDropdownOpen && (
                             <div
@@ -47,7 +58,11 @@ function Navbar() {
                                     minWidth: '200px',
                                 }}
                             >
-                                <a href="/login.html" className="dropdown-item">
+                                <a
+                                    href="/login.html"
+                                    className="dropdown-item"
+                                    onClick={() => {sessionStorage.removeItem('login')}}
+                                >
                                     <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
