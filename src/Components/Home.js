@@ -1,5 +1,5 @@
 import React from 'react';
-import DashboardImg from '../assets/Ability to Ask Questions for Power Platform - L100.png'
+import DashboardImg from '../assets/Boulder_dashboard.png'
 
 function Home() {
   return (
@@ -17,7 +17,7 @@ function Home() {
               <img
                 src={DashboardImg}
                 alt="Brand Logo"
-                style={{ height: '89vh', width: '180vh' }}
+                style={{  width: '100%' }}
               />
             </div>
           </div>

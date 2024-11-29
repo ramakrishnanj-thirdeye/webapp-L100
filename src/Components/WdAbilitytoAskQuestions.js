@@ -12,19 +12,19 @@ function Home() {
         {/* Begin Page Content */}
         <div className="container-fluid">
 
-          <div className="d-flex justify-content-center align-items-center vh-80">
+          
             <div className="card-body d-flex justify-content-center align-items-center p-0">
               <img
                 src={WdAbilitytoAskQuestionsDiagram}
                 alt="Brand Logo"
-                style={{ height: '89vh', width: '180vh' }}
+                style={{  width: '100%' }}
               />
             </div>
           </div>
 
         </div>
       </div>
-    </div>
+    
   );
 }
 
