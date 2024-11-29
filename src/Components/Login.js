@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import loginimg from "../assets/login_image.svg";
 
@@ -7,7 +6,6 @@ const Login = () => {
     const [username, setUsername] = useState("april@boulderinnovations.com");
     const [password, setPassword] = useState("password");
     const [error, setError] = useState(false);
-    const navigate = useNavigate();
 
     const handleLogin = () => {
         if (username === "april@boulderinnovations.com" && password === "password") {
