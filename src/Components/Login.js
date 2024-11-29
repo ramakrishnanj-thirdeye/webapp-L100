@@ -3,12 +3,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import loginimg from "../assets/login_image.svg";
 
 const Login = () => {
-    const [username, setUsername] = useState("april@boulderinnovations.com");
-    const [password, setPassword] = useState("password");
+    const [username, setUsername] = useState("cassandra@boulderinnovations.com");
+    const [password, setPassword] = useState("cassandra@321");
     const [error, setError] = useState(false);
 
     const handleLogin = () => {
-        if (username === "april@boulderinnovations.com" && password === "password") {
+        if (username === "cassandra@boulderinnovations.com" && password === "cassandra@321") {
             sessionStorage.setItem("login", "true");
             setError(false);
             window.location.reload(); // Navigate to the home page
@@ -18,7 +18,7 @@ const Login = () => {
     };
 
     return (
-        <div className="container vh-100 d-flex justify-content-center align-items-center bg-light">
+        <div className="vh-100 d-flex justify-content-center align-items-center bg-light">
             <div className="row w-100 justify-content-center">
                 <div className="col-md-8 col-sm-10">
                     <div className="card shadow-lg border-0 rounded-3">

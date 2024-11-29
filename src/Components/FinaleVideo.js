@@ -12,7 +12,7 @@ function FinaleVideo() {
         {/* Begin Page Content */}
         <div className="container-fluid">
 
-          <div className="d-flex justify-content-center align-items-center vh-80">
+          
             <div className="card-body d-flex justify-content-center align-items-center p-0">
               <video autoPlay muted controls>
                 <source src={FinaleVideoDemo} type="video/mp4" />
@@ -23,7 +23,7 @@ function FinaleVideo() {
 
         </div>
       </div>
-    </div>
+    
   );
 }
 

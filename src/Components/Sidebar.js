@@ -163,268 +163,405 @@
 
 // export default CustomSidebar;
 
-import React from 'react';
-import { Menu, MenuItem, Sidebar, SubMenu } from 'react-pro-sidebar';
+import React, { useState } from "react";
+import "./CustomSidebar.css"; // Import the updated sidebar styles
 
-function CustomSidebar({ setScreen, activeScreen }) { // Add activeScreen prop
-    return (
-        <Sidebar
-            style={{ backgroundColor: "#2d8029", height: "100vh" }}
-            width="270px"
-            transitionDuration={300}
-            breakPoint="md"
-        >
-            <Menu>
-                {/* Dashboard MenuItem */}
-                <MenuItem
-                    onClick={() => setScreen('dashboard')}
-                    icon={<i className="fas fa-fw fa-tachometer-alt"></i>}
-                    style={{
-                        fontWeight: activeScreen === 'dashboard' ? 'bold' : 'normal',
-                    }}
-                >
-                    <span>Dashboard</span>
-                </MenuItem>
+function CustomSidebar({ isSidebarOpen, setScreen, toggleSidebar, activeScreen }) {
+  const [openSubmenu, setOpenSubmenu] = useState(null); // Track the opened submenu
 
-                {/* System Architecture SubMenu */}
-                <SubMenu
-                    label="System Architecture"
-                    icon={<i className="fa-solid fa-chart-diagram"></i>}
-                >
-                    <MenuItem
-                        onClick={() => setScreen('workflow-overview')}
-                        style={{
-                            fontWeight: activeScreen === 'workflow-overview' ? 'bold' : 'normal',
-                        }}
-                    >
-                        <span>Workflow Overview</span>
-                    </MenuItem>
-                    <MenuItem
-                        onClick={() => setScreen('process-flow')}
-                        style={{
-                            fontWeight: activeScreen === 'process-flow' ? 'bold' : 'normal',
-                        }}
-                    >
-                        <span>Process Flow</span>
-                    </MenuItem>
-                </SubMenu>
+  // Function to toggle submenu visibility
+  const toggleSubmenu = (menu) => {
+    setOpenSubmenu(openSubmenu === menu ? null : menu); // Toggle submenu visibility
+  };
 
-                {/* Warehouse SubMenu */}
-                <SubMenu
-                    label="Warehouse App"
-                    icon={<i className="fa-solid fa-warehouse"></i>}
-                >
-                    <MenuItem
-                        onClick={() => setScreen('wd-warehouse-app')}
-                        style={{
-                            fontWeight: activeScreen === 'wd-warehouse-app' ? 'bold' : 'normal',
-                        }}
-                    >
-                        <span>Workflow Diagram</span>
-                    </MenuItem>
-                    <MenuItem
-                        onClick={() => setScreen('cbc-warehouse-app')}
-                        style={{
-                            fontWeight: activeScreen === 'cbc-warehouse-app' ? 'bold' : 'normal',
-                        }}
-                    >
-                        <span>Click By Click</span>
-                    </MenuItem>
-                    <MenuItem
-                        onClick={() => setScreen('v-warehouse-app')}
-                        style={{
-                            fontWeight: activeScreen === 'v-warehouse-app' ? 'bold' : 'normal',
-                        }}
-                    >
-                        <span>Video</span>
-                    </MenuItem>
-                </SubMenu>
+  return (
+    <div className={`custom-sidebar ${isSidebarOpen ? "open" : "closed"}`}>
+      <div className="sidebar-content">
+        <ul>
+          {/* Dashboard Menu Item */}
+          <li
+            className={`menu-item ${activeScreen === "dashboard" ? "active" : ""}`}
+            onClick={() => {
+              setScreen("dashboard");
+              toggleSidebar();
+            }}
+          >
+            <i className="fas fa-home-alt"></i> Home
+          </li>
 
-                {/* Admin App SubMenu */}
-                <SubMenu
-                    label="Admin App"
-                    icon={<i className="fa-solid fa-user-tie"></i>}
-                >
-                    <MenuItem
-                        onClick={() => setScreen('wd-regional-manager')}
-                        style={{
-                            fontWeight: activeScreen === 'wd-regional-manager' ? 'bold' : 'normal',
-                        }}
-                    >
-                        <span>Workflow Diagram</span>
-                    </MenuItem>
-                    <MenuItem
-                        onClick={() => setScreen('cbc-regional-manager')}
-                        style={{
-                            fontWeight: activeScreen === 'cbc-regional-manager' ? 'bold' : 'normal',
-                        }}
-                    >
-                        <span>Click By Click</span>
-                    </MenuItem>
-                    <MenuItem
-                        onClick={() => setScreen('v-regional-manager')}
-                        style={{
-                            fontWeight: activeScreen === 'v-regional-manager' ? 'bold' : 'normal',
-                        }}
-                    >
-                        <span>Video</span>
-                    </MenuItem>
-                </SubMenu>
+          {/* System Architecture Menu with Submenu */}
+          <li
+            className="menu-item"
+            onClick={() => toggleSubmenu("system-architecture")}
+          >
+            <i className="fa-solid fa-chart-diagram"></i> System Architecture
+            <i
+              className={`submenu-icon ${
+                openSubmenu === "system-architecture" ? "fa-chevron-up" : "fa-chevron-down"
+              } fa`}
+            ></i>
+          </li>
+          {openSubmenu === "system-architecture" && (
+            <ul className="submenu">
+              <li
+                className={`submenu-item ${
+                  activeScreen === "workflow-overview" ? "active" : ""
+                }`}
+                onClick={() => {
+                  setScreen("workflow-overview");
+                  toggleSidebar();
+                }}
+              >
+                Workflow Overview
+              </li>
+              <li
+                className={`submenu-item ${
+                  activeScreen === "process-flow" ? "active" : ""
+                }`}
+                onClick={() => {
+                  setScreen("process-flow");
+                  toggleSidebar();
+                }}
+              >
+                Process Flow
+              </li>
+            </ul>
+          )}
 
-                {/* App lifecycle management SubMenu */}
-                <SubMenu
-                    label="ALM"
-                    icon={<i className="fa-solid fa-people-roof"></i>}
-                >
-                    <MenuItem
-                        onClick={() => setScreen('wd-app-lifecycle-management')}
-                        style={{
-                            fontWeight: activeScreen === 'wd-app-lifecycle-management' ? 'bold' : 'normal',
-                        }}
-                    >
-                        <span>Workflow Diagram</span>
-                    </MenuItem>
-                    <MenuItem
-                        onClick={() => setScreen('cbc-app-lifecycle-management')}
-                        style={{
-                            fontWeight: activeScreen === 'cbc-app-lifecycle-management' ? 'bold' : 'normal',
-                        }}
-                    >
-                        <span>Click By Click</span>
-                    </MenuItem>
-                    <MenuItem
-                        onClick={() => setScreen('v-app-lifecycle-management')}
-                        style={{
-                            fontWeight: activeScreen === 'v-app-lifecycle-management' ? 'bold' : 'normal',
-                        }}
-                    >
-                        <span>Video</span>
-                    </MenuItem>
-                </SubMenu>
+          {/* Warehouse Menu with Submenu */}
+          <li
+            className="menu-item"
+            onClick={() => toggleSubmenu("warehouse")}
+          >
+            <i className="fa-solid fa-warehouse"></i> Warehouse App
+            <i
+              className={`submenu-icon ${
+                openSubmenu === "warehouse" ? "fa-chevron-up" : "fa-chevron-down"
+              } fa`}
+            ></i>
+          </li>
+          {openSubmenu === "warehouse" && (
+            <ul className="submenu">
+              <li
+                className={`submenu-item ${
+                  activeScreen === "wd-warehouse-app" ? "active" : ""
+                }`}
+                onClick={() => {
+                  setScreen("wd-warehouse-app");
+                  toggleSidebar();
+                }}
+              >
+                Workflow Diagram
+              </li>
+              <li
+                className={`submenu-item ${
+                  activeScreen === "cbc-warehouse-app" ? "active" : ""
+                }`}
+                onClick={() => {
+                  setScreen("cbc-warehouse-app");
+                  toggleSidebar();
+                }}
+              >
+                Click By Click
+              </li>
+              <li
+                className={`submenu-item ${
+                  activeScreen === "v-warehouse-app" ? "active" : ""
+                }`}
+                onClick={() => {
+                  setScreen("v-warehouse-app");
+                  toggleSidebar();
+                }}
+              >
+                Video
+              </li>
+            </ul>
+          )}
 
-                {/* Supplier Portal SubMenu */}
-                <SubMenu
-                    label="Supplier Portal"
-                    icon={<i className="fa-solid fa-truck-field"></i>}
-                >
-                    <MenuItem
-                        onClick={() => setScreen('wd-supplier-portal')}
-                        style={{
-                            fontWeight: activeScreen === 'wd-supplier-portal' ? 'bold' : 'normal',
-                        }}
-                    >
-                        <span>Workflow Diagram</span>
-                    </MenuItem>
-                    <MenuItem
-                        onClick={() => setScreen('cbc-supplier-portal')}
-                        style={{
-                            fontWeight: activeScreen === 'cbc-supplier-portal' ? 'bold' : 'normal',
-                        }}
-                    >
-                        <span>Click By Click</span>
-                    </MenuItem>
-                    <MenuItem
-                        onClick={() => setScreen('v-supplier-portal')}
-                        style={{
-                            fontWeight: activeScreen === 'v-supplier-portal' ? 'bold' : 'normal',
-                        }}
-                    >
-                        <span>Video</span>
-                    </MenuItem>
-                </SubMenu>
+          {/* Admin App Menu with Submenu */}
+          <li
+            className="menu-item"
+            onClick={() => toggleSubmenu("admin-app")}
+          >
+            <i className="fa-solid fa-user-tie"></i> Admin App
+            <i
+              className={`submenu-icon ${
+                openSubmenu === "admin-app" ? "fa-chevron-up" : "fa-chevron-down"
+              } fa`}
+            ></i>
+          </li>
+          {openSubmenu === "admin-app" && (
+            <ul className="submenu">
+              <li
+                className={`submenu-item ${
+                  activeScreen === "wd-regional-manager" ? "active" : ""
+                }`}
+                onClick={() => {
+                  setScreen("wd-regional-manager");
+                  toggleSidebar();
+                }}
+              >
+                Workflow Diagram
+              </li>
+              <li
+                className={`submenu-item ${
+                  activeScreen === "cbc-regional-manager" ? "active" : ""
+                }`}
+                onClick={() => {
+                  setScreen("cbc-regional-manager");
+                  toggleSidebar();
+                }}
+              >
+                Click By Click
+              </li>
+              <li
+                className={`submenu-item ${
+                  activeScreen === "v-regional-manager" ? "active" : ""
+                }`}
+                onClick={() => {
+                  setScreen("v-regional-manager");
+                  toggleSidebar();
+                }}
+              >
+                Video
+              </li>
+            </ul>
+          )}
 
-                {/* Invoice Processing SubMenu */}
-                <SubMenu
-                    label="Invoice Processing"
-                    icon={<i className="fa-solid fa-file-invoice"></i>}
-                >
-                    <MenuItem
-                        onClick={() => setScreen('wd-invoice-processing')}
-                        style={{
-                            fontWeight: activeScreen === 'wd-invoice-processing' ? 'bold' : 'normal',
-                        }}
-                    >
-                        <span>Workflow Diagram</span>
-                    </MenuItem>
-                    <MenuItem
-                        onClick={() => setScreen('cbc-invoice-processing')}
-                        style={{
-                            fontWeight: activeScreen === 'cbc-invoice-processing' ? 'bold' : 'normal',
-                        }}
-                    >
-                        <span>Click By Click</span>
-                    </MenuItem>
-                    <MenuItem
-                        onClick={() => setScreen('v-invoice-processing')}
-                        style={{
-                            fontWeight: activeScreen === 'v-invoice-processing' ? 'bold' : 'normal',
-                        }}
-                    >
-                        <span>Video</span>
-                    </MenuItem>
-                </SubMenu>
 
-                {/* Ability to Ask Questions SubMenu */}
-                <SubMenu
-                    label="Ability to Ask Questions"
-                    icon={<i className="fa-solid fa-question"></i>}
-                >
-                    <MenuItem
-                        onClick={() => setScreen('wd-ability-to-ask-questions')}
-                        style={{
-                            fontWeight: activeScreen === 'wd-ability-to-ask-questions' ? 'bold' : 'normal',
-                        }}
-                    >
-                        <span>Workflow Diagram</span>
-                    </MenuItem>
-                    <MenuItem
-                        onClick={() => setScreen('cbc-ability-to-ask-questions')}
-                        style={{
-                            fontWeight: activeScreen === 'cbc-ability-to-ask-questions' ? 'bold' : 'normal',
-                        }}
-                    >
-                        <span>Click By Click</span>
-                    </MenuItem>
-                </SubMenu>
+           {/* App Lifecycle Management Menu with Submenu */}
+           <li className="menu-item" onClick={() => toggleSubmenu("app-lifecycle-management")}>
+            <i className="fa-solid fa-people-roof"></i> App Lifecycle Management
+            <i
+              className={`submenu-icon ${
+                openSubmenu === "app-lifecycle-management" ? "fa-chevron-up" : "fa-chevron-down"
+              } fa`}
+            ></i>
+          </li>
+          {openSubmenu === "app-lifecycle-management" && (
+            <ul className="submenu">
+              <li
+                className={`submenu-item ${
+                  activeScreen === "wd-app-lifecycle-management" ? "active" : ""
+                }`}
+                onClick={() => {
+                  setScreen("wd-app-lifecycle-management");
+                  toggleSidebar();
+                }}
+              >
+                Workflow Diagram
+              </li>
+              <li
+                className={`submenu-item ${
+                  activeScreen === "cbc-app-lifecycle-management" ? "active" : ""
+                }`}
+                onClick={() => {
+                  setScreen("cbc-app-lifecycle-management");
+                  toggleSidebar();
+                }}
+              >
+                Click By Click
+              </li>
+              <li
+                className={`submenu-item ${
+                  activeScreen === "v-app-lifecycle-management" ? "active" : ""
+                }`}
+                onClick={() => {
+                  setScreen("v-app-lifecycle-management");
+                  toggleSidebar();
+                }}
+              >
+                Video
+              </li>
+            </ul>
+          )}
+          {/* Supplier Portal Menu */}
+          <li
+            className="menu-item"
+            onClick={() => toggleSubmenu("supplier-portal")}
+          >
+            <i className="fa-solid fa-truck-field"></i> Supplier Portal
+            <i
+              className={`submenu-icon ${
+                openSubmenu === "supplier-portal" ? "fa-chevron-up" : "fa-chevron-down"
+              } fa`}
+            ></i>
+          </li>
+          {openSubmenu === "supplier-portal" && (
+            <ul className="submenu">
+              <li
+                className={`submenu-item ${
+                  activeScreen === "wd-supplier-portal" ? "active" : ""
+                }`}
+                onClick={() => {
+                  setScreen("wd-supplier-portal");
+                  toggleSidebar();
+                }}
+              >
+                Workflow Diagram
+              </li>
+              <li
+                className={`submenu-item ${
+                  activeScreen === "cbc-supplier-portal" ? "active" : ""
+                }`}
+                onClick={() => {
+                  setScreen("cbc-supplier-portal");
+                  toggleSidebar();
+                }}
+              >
+                Click By Click
+              </li>
+              <li
+                className={`submenu-item ${
+                  activeScreen === "v-supplier-portal" ? "active" : ""
+                }`}
+                onClick={() => {
+                  setScreen("v-supplier-portal");
+                  toggleSidebar();
+                }}
+              >
+                Video
+              </li>
+            </ul>
+          )}
 
-                {/* Power Automates for the apps SubMenu */}
-                <SubMenu
-                    label="Power Automates"
-                    icon={<i className="fas fa-cogs fa-sm fa-fw"></i>}
-                >
-                    <MenuItem
-                        onClick={() => setScreen('cbc-Power-Automates-for-the-apps')}
-                        style={{
-                            fontWeight: activeScreen === 'cbc-Power-Automates-for-the-apps' ? 'bold' : 'normal',
-                        }}
-                    >
-                        <span>Click By Click</span>
-                    </MenuItem>
-                </SubMenu>
+          {/* Invoice Processing SubMenu */}
+          <li
+            className="menu-item"
+            onClick={() => toggleSubmenu("invoice-processing")}
+          >
+            <i className="fa-solid fa-file-invoice"></i> Invoice Processing
+            <i
+              className={`submenu-icon ${
+                openSubmenu === "invoice-processing" ? "fa-chevron-up" : "fa-chevron-down"
+              } fa`}
+            ></i>
+          </li>
+          {openSubmenu === "invoice-processing" && (
+            <ul className="submenu">
+              <li
+                className={`submenu-item ${
+                  activeScreen === "wd-invoice-processing" ? "active" : ""
+                }`}
+                onClick={() => {
+                  setScreen("wd-invoice-processing");
+                  toggleSidebar();
+                }}
+              >
+                Workflow Diagram
+              </li>
+              <li
+                className={`submenu-item ${
+                  activeScreen === "cbc-invoice-processing" ? "active" : ""
+                }`}
+                onClick={() => {
+                  setScreen("cbc-invoice-processing");
+                  toggleSidebar();
+                }}
+              >
+                Click By Click
+              </li>
+              <li
+                className={`submenu-item ${
+                  activeScreen === "v-invoice-processing" ? "active" : ""
+                }`}
+                onClick={() => {
+                  setScreen("v-invoice-processing");
+                  toggleSidebar();
+                }}
+              >
+                Video
+              </li>
+            </ul>
+          )}
 
-                {/* Finale Video MenuItem */}
-                <MenuItem
-                    onClick={() => setScreen('Sales-video')}
-                    icon={<i className="fa-solid fa-user-shield"></i>}
-                    style={{
-                        fontWeight: activeScreen === 'Sales-video' ? 'bold' : 'normal',
-                    }}
-                >
-                    <span>Sales Video</span>
-                </MenuItem>
+          {/* Ability to Ask Questions SubMenu */}
+          <li
+            className="menu-item"
+            onClick={() => toggleSubmenu("ability-to-ask-questions")}
+          >
+            <i className="fa-solid fa-question"></i> Ability to Ask Questions
+            <i
+              className={`submenu-icon ${
+                openSubmenu === "ability-to-ask-questions" ? "fa-chevron-up" : "fa-chevron-down"
+              } fa`}
+            ></i>
+          </li>
+          {openSubmenu === "ability-to-ask-questions" && (
+            <ul className="submenu">
+              <li
+                className={`submenu-item ${
+                  activeScreen === "wd-ability-to-ask-questions" ? "active" : ""
+                }`}
+                onClick={() => {
+                  setScreen("wd-ability-to-ask-questions");
+                  toggleSidebar();
+                }}
+              >
+                Workflow Diagram
+              </li>
+              <li
+                className={`submenu-item ${
+                  activeScreen === "cbc-ability-to-ask-questions" ? "active" : ""
+                }`}
+                onClick={() => {
+                  setScreen("cbc-ability-to-ask-questions");
+                  toggleSidebar();
+                }}
+              >
+                Click By Click
+              </li>
+            </ul>
+          )}
 
-                <MenuItem
-                    onClick={() => setScreen('finale-video')}
-                    icon={<i className="fas fa-fw fa-video"></i>}
-                    style={{
-                        fontWeight: activeScreen === 'finale-video' ? 'bold' : 'normal',
-                    }}
-                >
-                    <span>Finale Video</span>
-                </MenuItem>
-            </Menu>
-        </Sidebar>
-    );
+          {/* Power Automates SubMenu */}
+          <li
+            className="menu-item"
+            onClick={() => toggleSubmenu("power-automates")}
+          >
+            <i className="fa-solid fa-plug"></i> Power Automates
+            <i
+              className={`submenu-icon ${
+                openSubmenu === "power-automates" ? "fa-chevron-up" : "fa-chevron-down"
+              } fa`}
+            ></i>
+          </li>
+          {openSubmenu === "power-automates" && (
+            <ul className="submenu">
+              <li
+                className={`submenu-item ${
+                  activeScreen === "cbc-power-automates" ? "active" : ""
+                }`}
+                onClick={() => {
+                  setScreen("cbc-power-automates");
+                  toggleSidebar();
+                }}
+              >
+                Click By Click
+              </li>
+            </ul>
+
+          )}
+
+          {/* Sales Video Menu Item */}
+          <li onClick={() => {setScreen('sales-video');toggleSidebar()}}>
+                        <i className="fas fa-video"></i> Sales Video
+                    </li>
+       
+        {/* Finale Video Menu Item */}
+        <li onClick={() => {setScreen('finale-video');toggleSidebar()}}>
+                        <i className="fas fa-video"></i> Finale Video
+                    </li>
+
+                    </ul>
+        
+      </div>
+    </div>
+  );
 }
 
 export default CustomSidebar;
+
+
+
+

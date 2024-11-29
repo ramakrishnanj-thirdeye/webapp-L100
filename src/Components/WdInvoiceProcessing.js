@@ -17,7 +17,7 @@ function Home() {
               <img
                 src={DashboardImg}
                 alt="Brand Logo"
-                style={{ height: '89vh', width: '180vh' }}
+                style={{  width: '100%' }}
               />
             </div>
           </div>
