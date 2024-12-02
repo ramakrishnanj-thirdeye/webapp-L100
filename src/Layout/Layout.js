@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
+
+// Components
 import Home from '../Components/Home';
 import Navbar from '../Components/Navbar';
 import CustomSidebar from '../Components/Sidebar';
@@ -26,11 +28,15 @@ import SalesVideo from '../Components/SalesVideo';
 import FinaleVideo from '../Components/FinaleVideo';
 
 function Layout() {
+    // State hooks
     const [screen, setScreen] = useState('dashboard');
     const [step, setStep] = useState(0);
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Manage sidebar state
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [history, setHistory] = useState([]); // Track navigation history
+    const [isBackHovered, setIsBackHovered] = useState(false);
+    const [isPlayHovered, setIsPlayHovered] = useState(false);
 
-    // Define all screens for navigation as a ref to ensure it remains constant
+    // Reference for all screens
     const screensRef = useRef([
         'dashboard',
         'workflow-overview',
@@ -41,7 +47,7 @@ function Layout() {
         'wd-regional-manager',
         'cbc-regional-manager',
         'v-regional-manager',
-        'Wd-app-lifecycle-management',
+        'wd-app-lifecycle-management',
         'cbc-app-lifecycle-management',
         'v-app-lifecycle-management',
         'wd-supplier-portal',
@@ -57,69 +63,31 @@ function Layout() {
         'finale-video',
     ]);
 
+    // Update step when screen changes
     useEffect(() => {
         const currentStep = screensRef.current.indexOf(screen);
-        if (currentStep !== -1) {
-            setStep(currentStep);
-        }
-    }, [screen]); // Only depend on 'screen'
+        if (currentStep !== -1) setStep(currentStep);
+    }, [screen]);
 
+    // Event handlers
     const handlePlayButtonClick = () => {
         const nextStep = (step + 1) % screensRef.current.length;
+        setHistory([...history, screen]); // Track screen navigation
         setScreen(screensRef.current[nextStep]);
     };
 
-    // Render the component based on the selected screen
-    const renderScreen = () => {
-        switch (screen) {
-            case 'dashboard':
-                return <Home />;
-            case 'workflow-overview':
-                return <WorkflowOverview />;
-            case 'process-flow':
-                return <ProcessFlow />;
-            case 'wd-warehouse-app':
-                return <WdWarehouseApp />;
-            case 'cbc-warehouse-app':
-                return <CbcWarehouseApp />;
-            case 'v-warehouse-app':
-                return <VWarehouseApp />;
-            case 'wd-regional-manager':
-                return <WdAdminApp />;
-            case 'cbc-regional-manager':
-                return <CbcAdminApp />;
-            case 'v-regional-manager':
-                return <VAdminApp />;
-            case 'Wd-app-lifecycle-management':
-                return <WdALM />;
-            case 'cbc-app-lifecycle-management':
-                return <CbcALM />;
-            case 'v-app-lifecycle-management':
-                return <VALM />;
-            case 'wd-supplier-portal':
-                return <WdSupplierPortal />;
-            case 'cbc-supplier-portal':
-                return <CbcSupplierPortal />;
-            case 'v-supplier-portal':
-                return <VSupplierPortal />;
-            case 'wd-invoice-processing':
-                return <WdInvoiceProcessing />;
-            case 'cbc-invoice-processing':
-                return <CbcInvoiceProcessing />;
-            case 'v-invoice-processing':
-                return <VInvoiceProcessing />;
-            case 'wd-ability-to-ask-questions':
-                return <WdAbilitytoAskQuestions />;
-            case 'cbc-ability-to-ask-questions':
-                return <CbcAbilitytoAskQuestions />;
-            case 'cbc-power-automates':
-                return <CbcPowerAutomates />;
-            case 'sales-video':
-                return <SalesVideo />;
-            case 'finale-video':
-                return <FinaleVideo />;
-            default:
-                return <Home />;
+    const handleSidebarMenuClick = (newScreen) => {
+        if (newScreen !== screen) {
+            setHistory([...history, screen]);
+            setScreen(newScreen);
+        }
+    };
+
+    const handleBackButtonClick = () => {
+        if (history.length > 0) {
+            const previousScreen = history[history.length - 1];
+            setHistory(history.slice(0, -1)); // Remove last screen from history
+            setScreen(previousScreen);
         }
     };
 
@@ -127,30 +95,93 @@ function Layout() {
         setIsSidebarOpen(!isSidebarOpen);
     };
 
+    // Screen rendering
+    const renderScreen = () => {
+        switch (screen) {
+            case 'dashboard': return <Home />;
+            case 'workflow-overview': return <WorkflowOverview />;
+            case 'process-flow': return <ProcessFlow />;
+            case 'wd-warehouse-app': return <WdWarehouseApp />;
+            case 'cbc-warehouse-app': return <CbcWarehouseApp />;
+            case 'v-warehouse-app': return <VWarehouseApp />;
+            case 'wd-regional-manager': return <WdAdminApp />;
+            case 'cbc-regional-manager': return <CbcAdminApp />;
+            case 'v-regional-manager': return <VAdminApp />;
+            case 'wd-app-lifecycle-management': return <WdALM />;
+            case 'cbc-app-lifecycle-management': return <CbcALM />;
+            case 'v-app-lifecycle-management': return <VALM />;
+            case 'wd-supplier-portal': return <WdSupplierPortal />;
+            case 'cbc-supplier-portal': return <CbcSupplierPortal />;
+            case 'v-supplier-portal': return <VSupplierPortal />;
+            case 'wd-invoice-processing': return <WdInvoiceProcessing />;
+            case 'cbc-invoice-processing': return <CbcInvoiceProcessing />;
+            case 'v-invoice-processing': return <VInvoiceProcessing />;
+            case 'wd-ability-to-ask-questions': return <WdAbilitytoAskQuestions />;
+            case 'cbc-ability-to-ask-questions': return <CbcAbilitytoAskQuestions />;
+            case 'cbc-power-automates': return <CbcPowerAutomates />;
+            case 'sales-video': return <SalesVideo />;
+            case 'finale-video': return <FinaleVideo />;
+            default: return <Home />;
+        }
+    };
+
+    // JSX layout
     return (
         <div>
             <Navbar toggleSidebar={toggleSidebar} />
             <div className="layout-container">
                 {/* Sidebar */}
-                <div>
-                    <CustomSidebar setScreen={setScreen} isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-                </div>
+                <CustomSidebar
+                    setScreen={handleSidebarMenuClick}
+                    isSidebarOpen={isSidebarOpen}
+                    toggleSidebar={toggleSidebar}
+                    activeScreen={screen}
+                />
 
                 {/* Main content area */}
-                <div className="main-content">
+                <div className="main-content" style={{ position: 'relative' }}>
                     {renderScreen()}
+
+                    {/* Back Button */}
+                    <button
+                        className="btn btn-secondary back-button"
+                        onClick={handleBackButtonClick}
+                        onMouseEnter={() => setIsBackHovered(true)}
+                        onMouseLeave={() => setIsBackHovered(false)}
+                        style={{
+                            position: 'absolute',
+                            top: '10px',
+                            left: '20px',
+                            zIndex: 1000,
+                            width: '40px',
+                            height: '40px',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            padding: '0',
+                            backgroundColor: isBackHovered ? 'blue' : '',
+                            color: isBackHovered ? 'white' : '',
+                            transition: 'background-color 0.3s ease',
+                        }}
+                    >
+                        <i className="fa fa-arrow-left" style={{ fontSize: '12px' }}></i>
+                    </button>
 
                     {/* Play Button */}
                     <button
-                        className="btn btn-primary play-button"
+                        className="btn btn-secondary play-button"
                         onClick={handlePlayButtonClick}
+                        onMouseEnter={() => setIsPlayHovered(true)}
+                        onMouseLeave={() => setIsPlayHovered(false)}
                         style={{
-                            position: 'fixed',
-                            top: '90px',
-                            right: '20px',
+                            width: '30px',
+                            height: '30px',
+                            transition: 'background-color 0.3s ease',
+                            backgroundColor: isPlayHovered ? 'blue' : '',
+                            color: isPlayHovered ? 'white' : '',
                         }}
                     >
-                        <i className="fa fa-play" aria-hidden="true"></i> {step + 1}
+                        <i className="fa fa-play" style={{ fontSize: '12px' }}></i> {step + 1}
                     </button>
                 </div>
             </div>
