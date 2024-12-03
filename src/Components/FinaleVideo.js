@@ -1,5 +1,4 @@
 import React from 'react';
-import FinaleVideoDemo from '../assets/video assets/Microsoft Power Platform - L100 Demo - Finale Video.mp4';
 
 function FinaleVideo() {
   return (
@@ -12,10 +11,13 @@ function FinaleVideo() {
         {/* Begin Page Content */}
         <div className="container-fluid">
 
-          
+          <div className="d-flex justify-content-center align-items-center vh-80">
             <div className="card-body d-flex justify-content-center align-items-center p-0">
               <video autoPlay muted controls>
-                <source src={FinaleVideoDemo} type="video/mp4" />
+                <source 
+                  src="https://stdemoassets.blob.core.windows.net/videos/L100/7.%20Microsoft%20Power%20Platform-Finale%20Video.mp4" 
+                  type="video/mp4" 
+                />
                 Your browser does not support the video tag.
               </video>
             </div>
@@ -23,7 +25,7 @@ function FinaleVideo() {
 
         </div>
       </div>
-    
+    </div>
   );
 }
 

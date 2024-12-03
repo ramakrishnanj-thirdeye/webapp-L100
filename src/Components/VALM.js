@@ -1,5 +1,4 @@
 import React from 'react';
-import AMLdemoVideo from '../assets/video assets/Microsoft Power Platform - L100 Demo - ALM.mp4';
 
 function VALM() {
   return (
@@ -15,7 +14,10 @@ function VALM() {
           <div className="d-flex justify-content-center align-items-center vh-80">
             <div className="card-body d-flex justify-content-center align-items-center p-0">
               <video autoPlay muted controls>
-                <source src={AMLdemoVideo} type="video/mp4" />
+                <source 
+                  src="https://stdemoassets.blob.core.windows.net/videos/L100/3.%20Microsoft%20Power%20Platform-%20ALM.mp4" 
+                  type="video/mp4" 
+                />
                 Your browser does not support the video tag.
               </video>
             </div>

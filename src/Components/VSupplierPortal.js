@@ -1,5 +1,4 @@
 import React from 'react';
-import SupplierdemoVideo from '../assets/video assets/Microsoft Power Platform - L100 Demo - Supplier Portal Video.mp4';
 
 function VSupplierPortal() {
   return (
@@ -15,7 +14,10 @@ function VSupplierPortal() {
           <div className="d-flex justify-content-center align-items-center vh-80">
             <div className="card-body d-flex justify-content-center align-items-center p-0">
               <video autoPlay muted controls>
-                <source src={SupplierdemoVideo} type="video/mp4" />
+                <source 
+                  src="https://stdemoassets.blob.core.windows.net/videos/L100/4.%20Microsoft%20Power%20Platform-Supplier%20Portal.mp4" 
+                  type="video/mp4" 
+                />
                 Your browser does not support the video tag.
               </video>
             </div>
