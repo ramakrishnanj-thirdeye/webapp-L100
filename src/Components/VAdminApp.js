@@ -1,5 +1,4 @@
 import React from 'react';
-import AdmindemoVideo from '../assets/video assets/Microsoft Power Platform - L100 Demo -Regional Manager APP.mp4';
 
 function VAdminApp() {
   return (
@@ -15,7 +14,10 @@ function VAdminApp() {
           <div className="d-flex justify-content-center align-items-center vh-80">
             <div className="card-body d-flex justify-content-center align-items-center p-0">
               <video autoPlay muted controls>
-                <source src={AdmindemoVideo} type="video/mp4" />
+                <source 
+                  src="https://stdemoassets.blob.core.windows.net/videos/L100/2.%20Microsoft%20Power%20Platform-Regional%20Manager%20APP.mp4" 
+                  type="video/mp4" 
+                />
                 Your browser does not support the video tag.
               </video>
             </div>

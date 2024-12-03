@@ -1,5 +1,4 @@
 import React from 'react';
-import demoVideo from '../assets/video assets/Microsoft Power Platform - L100 Demo - Warehouse Management APP.mp4';
 
 function VWarehouseApp() {
   return (
@@ -15,7 +14,10 @@ function VWarehouseApp() {
           <div className="d-flex justify-content-center align-items-center vh-80">
             <div className="card-body d-flex justify-content-center align-items-center p-0">
               <video autoPlay muted controls>
-                <source src={demoVideo} type="video/mp4" />
+                <source 
+                  src="https://stdemoassets.blob.core.windows.net/videos/L100/1.%20Microsoft%20Power%20Platform%20-%20Warehouse%20Management%20APP.mp4" 
+                  type="video/mp4" 
+                />
                 Your browser does not support the video tag.
               </video>
             </div>
