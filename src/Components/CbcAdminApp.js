@@ -40,7 +40,7 @@ function CbcAdminApp() {
               id="demoframe"
               style={{ height: "calc(100vh - 56px)", width: "100vw" }}
               sandbox="allow-scripts allow-popups allow-popups-to-escape-sandbox"
-              src="https://regale.cloud/thirdeye-data/play/3822/power-platform-accelerate-innovation-with-ai-in-low-code-regional-manager-portal#/0/0"
+              src="https://regale.cloud/thirdeye-data/play/3822/power-platform-fy25-innovate-with-ai-in-low-code-demo-regional-manager-portal-us#/0/0"
               title="Demo Frame"
               onLoad={handleIframeLoad} // Triggered when iframe is fully loaded
             ></iframe>

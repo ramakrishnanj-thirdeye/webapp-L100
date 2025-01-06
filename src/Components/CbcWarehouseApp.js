@@ -40,7 +40,7 @@ function CbcWarehouseApp() {
               id="demoframe"
               style={{ height: "calc(100vh - 56px)", width: "100vw" }}
               sandbox="allow-scripts allow-popups allow-popups-to-escape-sandbox"
-              src="https://regale.cloud/thirdeye-data/play/3820/power-platform-accelerate-innovation-with-ai-in-low-code-warehouse-app-user#/0/0"
+              src="https://regale.cloud/thirdeye-data/play/3820/power-platform-fy25-innovate-with-ai-in-low-code-demo-warehouse-app-user#/0/0"
               title="Demo Frame"
               onLoad={handleIframeLoad} // Triggered when iframe is fully loaded
             ></iframe>

@@ -116,7 +116,7 @@ function CustomSidebar({ isSidebarOpen, setScreen, toggleSidebar, activeScreen }
                   toggleSidebar();
                 }}
               >
-                Workflow Diagram
+                Workflow Overview
               </li>
               <li
                 className={`submenu-item ${activeScreen === "cbc-warehouse-app" ? "active" : ""
@@ -126,7 +126,7 @@ function CustomSidebar({ isSidebarOpen, setScreen, toggleSidebar, activeScreen }
                   toggleSidebar();
                 }}
               >
-                Click By Click
+                Warehouse APP Click-through
               </li>
               <li
                 className={`submenu-item ${activeScreen === "v-warehouse-app" ? "active" : ""
@@ -136,7 +136,7 @@ function CustomSidebar({ isSidebarOpen, setScreen, toggleSidebar, activeScreen }
                   toggleSidebar();
                 }}
               >
-                Video
+                Warehouse APP Video 
               </li>
             </ul>
           )}
@@ -162,7 +162,7 @@ function CustomSidebar({ isSidebarOpen, setScreen, toggleSidebar, activeScreen }
                   toggleSidebar();
                 }}
               >
-                Workflow Diagram
+                Workflow Overview
               </li>
               <li
                 className={`submenu-item ${activeScreen === "cbc-regional-manager" ? "active" : ""
@@ -172,7 +172,7 @@ function CustomSidebar({ isSidebarOpen, setScreen, toggleSidebar, activeScreen }
                   toggleSidebar();
                 }}
               >
-                Click By Click
+                ALM Click-through
               </li>
               <li
                 className={`submenu-item ${activeScreen === "v-regional-manager" ? "active" : ""
@@ -182,7 +182,7 @@ function CustomSidebar({ isSidebarOpen, setScreen, toggleSidebar, activeScreen }
                   toggleSidebar();
                 }}
               >
-                Video
+                ALM Video 
               </li>
             </ul>
           )}
@@ -206,7 +206,7 @@ function CustomSidebar({ isSidebarOpen, setScreen, toggleSidebar, activeScreen }
                   toggleSidebar();
                 }}
               >
-                Workflow Diagram
+                Workflow Overview
               </li>
               <li
                 className={`submenu-item ${activeScreen === "cbc-app-lifecycle-management" ? "active" : ""
@@ -216,7 +216,7 @@ function CustomSidebar({ isSidebarOpen, setScreen, toggleSidebar, activeScreen }
                   toggleSidebar();
                 }}
               >
-                Click By Click
+                ALM Click-through 
               </li>
               <li
                 className={`submenu-item ${activeScreen === "v-app-lifecycle-management" ? "active" : ""
@@ -226,7 +226,7 @@ function CustomSidebar({ isSidebarOpen, setScreen, toggleSidebar, activeScreen }
                   toggleSidebar();
                 }}
               >
-                Video
+                ALM Video
               </li>
             </ul>
           )}
@@ -251,7 +251,7 @@ function CustomSidebar({ isSidebarOpen, setScreen, toggleSidebar, activeScreen }
                   toggleSidebar();
                 }}
               >
-                Workflow Diagram
+                Workflow Overview
               </li>
               <li
                 className={`submenu-item ${activeScreen === "cbc-supplier-portal" ? "active" : ""
@@ -261,7 +261,7 @@ function CustomSidebar({ isSidebarOpen, setScreen, toggleSidebar, activeScreen }
                   toggleSidebar();
                 }}
               >
-                Click By Click
+                Supplier Portal Click-through
               </li>
               <li
                 className={`submenu-item ${activeScreen === "v-supplier-portal" ? "active" : ""
@@ -271,7 +271,7 @@ function CustomSidebar({ isSidebarOpen, setScreen, toggleSidebar, activeScreen }
                   toggleSidebar();
                 }}
               >
-                Video
+                Supplier Portal Video 
               </li>
             </ul>
           )}
@@ -297,7 +297,7 @@ function CustomSidebar({ isSidebarOpen, setScreen, toggleSidebar, activeScreen }
                   toggleSidebar();
                 }}
               >
-                Workflow Diagram
+                Workflow Overview
               </li>
               <li
                 className={`submenu-item ${activeScreen === "cbc-invoice-processing" ? "active" : ""
@@ -307,7 +307,7 @@ function CustomSidebar({ isSidebarOpen, setScreen, toggleSidebar, activeScreen }
                   toggleSidebar();
                 }}
               >
-                Click By Click
+                Invoice Processing Click-through
               </li>
               <li
                 className={`submenu-item ${activeScreen === "v-invoice-processing" ? "active" : ""
@@ -317,7 +317,7 @@ function CustomSidebar({ isSidebarOpen, setScreen, toggleSidebar, activeScreen }
                   toggleSidebar();
                 }}
               >
-                Video
+                Invoice Processing Video 
               </li>
             </ul>
           )}
@@ -343,7 +343,7 @@ function CustomSidebar({ isSidebarOpen, setScreen, toggleSidebar, activeScreen }
                   toggleSidebar();
                 }}
               >
-                Workflow Diagram
+                Workflow Overview
               </li>
               <li
                 className={`submenu-item ${activeScreen === "cbc-ability-to-ask-questions" ? "active" : ""
@@ -353,7 +353,7 @@ function CustomSidebar({ isSidebarOpen, setScreen, toggleSidebar, activeScreen }
                   toggleSidebar();
                 }}
               >
-                Click By Click
+                AtA Questions Click-through
               </li>
             </ul>
           )}
@@ -379,7 +379,7 @@ function CustomSidebar({ isSidebarOpen, setScreen, toggleSidebar, activeScreen }
                   toggleSidebar();
                 }}
               >
-                Click By Click
+                Power Automates Click-through
               </li>
             </ul>
 
