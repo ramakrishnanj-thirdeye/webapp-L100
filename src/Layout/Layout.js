@@ -1,5 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
-
+import React, { useEffect, useState } from 'react';
 // Components
 import Home from '../Components/Home';
 import Navbar from '../Components/Navbar';
@@ -27,17 +26,10 @@ import CbcPowerAutomates from '../Components/CbcPowerAutomates';
 import SalesVideo from '../Components/SalesVideo';
 import FinaleVideo from '../Components/FinaleVideo';
 
-function Layout() {
-    // State hooks
-    const [screen, setScreen] = useState('dashboard');
-    const [step, setStep] = useState(0);
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const [history, setHistory] = useState([]); // Track navigation history
-    const [isBackHovered, setIsBackHovered] = useState(false);
-    const [isPlayHovered, setIsPlayHovered] = useState(false);
+
 
     // Reference for all screens
-    const screensRef = useRef([
+    const screens= [
         'dashboard',
         'workflow-overview',
         'process-flow',
@@ -61,39 +53,46 @@ function Layout() {
         'cbc-power-automates',
         'sales-video',
         'finale-video',
-    ]);
+    ];
+
+
+    function Layout() {
+        // State hooks
+        const [screen, setScreen] = useState('dashboard');
+        const [step, setStep] = useState(0);
+        const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+        const [history, setHistory] = useState([]); // Track navigation history
+        const [isBackHovered, setIsBackHovered] = useState(false);
+        const [isPlayHovered, setIsPlayHovered] = useState(false);
 
     // Update step when screen changes
     useEffect(() => {
-        const currentStep = screensRef.current.indexOf(screen);
-        if (currentStep !== -1) setStep(currentStep);
-    }, [screen]);
-
-    // Event handlers
-    const handlePlayButtonClick = () => {
-        const nextStep = (step + 1) % screensRef.current.length;
-        setHistory([...history, screen]); // Track screen navigation
-        setScreen(screensRef.current[nextStep]);
-    };
-
-    const handleSidebarMenuClick = (newScreen) => {
+        const currentStep = screens.indexOf(screen);
+        if (currentStep !== -1) {
+          setStep(currentStep);
+        }
+      }, [screen]); // screens is now defined outside the component, so it doesn't need to be in dependencies
+    
+      const handlePlayButtonClick = () => {
+        const nextStep = (step + 1) % screens.length;
+        setHistory([...history, screen]);
+        setScreen(screens[nextStep]);
+      };
+    
+      const handleSidebarMenuClick = (newScreen) => {
         if (newScreen !== screen) {
-            setHistory([...history, screen]);
-            setScreen(newScreen);
+          setHistory([...history, screen]);
+          setScreen(newScreen);
         }
-    };
-
-    const handleBackButtonClick = () => {
+      };
+    
+      const handleBackButtonClick = () => {
         if (history.length > 0) {
-            const previousScreen = history[history.length - 1];
-            setHistory(history.slice(0, -1)); // Remove last screen from history
-            setScreen(previousScreen);
+          const previousScreen = history[history.length - 1];
+          setHistory(history.slice(0, -1));
+          setScreen(previousScreen);
         }
-    };
-
-    const toggleSidebar = () => {
-        setIsSidebarOpen(!isSidebarOpen);
-    };
+      };
 
     // Screen rendering
     const renderScreen = () => {
@@ -126,67 +125,99 @@ function Layout() {
     };
 
     // JSX layout
-    return (
+    const toggleSidebar = () => {
+        setIsSidebarOpen(!isSidebarOpen);
+      };
+    
+      return (
         <div>
-            <Navbar toggleSidebar={toggleSidebar} />
-            <div className="layout-container">
-                {/* Sidebar */}
-                <CustomSidebar
-                    setScreen={handleSidebarMenuClick}
-                    isSidebarOpen={isSidebarOpen}
-                    toggleSidebar={toggleSidebar}
-                    activeScreen={screen}
-                />
-
-                {/* Main content area */}
-                <div className="main-content" style={{ position: 'relative' }}>
-                    {renderScreen()}
-
-                    {/* Back Button */}
-                    <button
-                        className="btn btn-secondary back-button"
-                        onClick={handleBackButtonClick}
-                        onMouseEnter={() => setIsBackHovered(true)}
-                        onMouseLeave={() => setIsBackHovered(false)}
-                        style={{
-                            position: 'absolute',
-                            top: '10px',
-                            left: '20px',
-                            zIndex: 1000,
-                            width: '40px',
-                            height: '40px',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            padding: '0',
-                            backgroundColor: isBackHovered ? 'blue' : '',
-                            color: isBackHovered ? 'white' : '',
-                            transition: 'background-color 0.3s ease',
-                        }}
-                    >
-                        <i className="fa fa-arrow-left" style={{ fontSize: '12px' }}></i>
-                    </button>
-
-                    {/* Play Button */}
-                    <button
-                        className="btn btn-secondary play-button"
-                        onClick={handlePlayButtonClick}
-                        onMouseEnter={() => setIsPlayHovered(true)}
-                        onMouseLeave={() => setIsPlayHovered(false)}
-                        style={{
-                            width: '30px',
-                            height: '30px',
-                            transition: 'background-color 0.3s ease',
-                            backgroundColor: isPlayHovered ? 'blue' : '',
-                            color: isPlayHovered ? 'white' : '',
-                        }}
-                    >
-                        <i className="fa fa-play" style={{ fontSize: '12px' }}></i> {step + 1}
-                    </button>
-                </div>
+          <Navbar toggleSidebar={toggleSidebar} />
+          <div className="layout-container">
+            <CustomSidebar 
+              setScreen={handleSidebarMenuClick} 
+              isSidebarOpen={isSidebarOpen} 
+              toggleSidebar={toggleSidebar} 
+              activeScreen={screen} 
+            />
+            <div 
+              className="main-content fluent-container" 
+              style={{ 
+                position: 'relative',
+                background: `
+                  conic-gradient(
+                    from 45deg at 50% 50%,
+                    rgba(135, 206, 235, 0.6) 0deg,
+                    rgba(32, 229, 173, 0.64) 90deg,
+                    rgba(33, 162, 191, 0.4) 180deg,
+                    rgba(13, 78, 108, 0.4) 270deg,
+                    rgba(135, 206, 235, 0.6) 360deg
+                  ),
+                  linear-gradient(
+                    to bottom,
+                    rgba(255, 255, 255, 0.1),
+                    rgba(255, 255, 255, 0.05)
+                  )
+                `,
+                backdropFilter: 'blur(16px)',
+                borderRadius: '16px',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                boxShadow: `
+                  0 4px 30px rgba(0, 0, 0, 0.1),
+                  inset 0 0 80px rgba(255, 255, 255, 0.1)
+                `,
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center',
+                transition: 'all 0.3s ease',
+              }}
+            >
+              {renderScreen()}
+              <button 
+                className="btn btn-secondary back-button" 
+                onClick={handleBackButtonClick}
+                onMouseEnter={() => setIsBackHovered(true)}
+                onMouseLeave={() => setIsBackHovered(false)}
+                style={{
+                  position: 'absolute',
+                  top: '20px',
+                  left: '20px',
+                  zIndex: 1000,
+                  width: '35px',
+                  height: '35px',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  padding: '0',
+                  backgroundColor: isBackHovered ? 'blue' : '',
+                  color: isBackHovered ? 'white' : '',
+                  transition: 'background-color 0.3s ease',
+                }}
+              >
+                <i className="fa fa-arrow-left" aria-hidden="true" style={{ fontSize: '12px' }}></i>
+              </button>
+              <button 
+                className="btn btn-secondary play-button"
+                onClick={handlePlayButtonClick}
+                onMouseEnter={() => setIsPlayHovered(true)}
+                onMouseLeave={() => setIsPlayHovered(false)}
+                style={{
+                  position: 'absolute',
+                  top: '20px',
+                  right: '20px',
+                  width: '30px',
+                  height: '30px',
+                  transition: 'background-color 0.3s ease',
+                  backgroundColor: isPlayHovered ? 'blue' : '',
+                  color: isPlayHovered ? 'white' : '',
+                }}
+              >
+                <i className="fa fa-play" aria-hidden="true" style={{ fontSize: '12px' }}></i>
+                {step + 1}
+              </button>
             </div>
+          </div>
         </div>
-    );
-}
-
-export default Layout;
+      );
+    }
+    
+    export default Layout;
